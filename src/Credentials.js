@@ -9,6 +9,7 @@ class Credentials {
   #host;
   #localFolder;
   #remoteFolder;
+  #port;
 
   constructor() {
     if (Credentials.instance != null) {
@@ -35,6 +36,9 @@ class Credentials {
   get remoteFolder() {
     return this.#remoteFolder;
   }
+  get port() {
+    return this.#port;
+  }
 
   set username(val) {
     this.#username = val;
@@ -56,6 +60,10 @@ class Credentials {
     this.#remoteFolder = val;
     return this;
   }
+  set port(val) {
+    this.#port = val;
+    return this;
+  }
 
   envInput() {
     this.#username = process.env.UNAME;
@@ -67,15 +75,10 @@ class Credentials {
 
   async userInput() {
     this.#username = await UserInput.ask('username: ');
-    this.print();
     this.#password = await UserInput.ask('password: ');
-    this.print();
     this.#host = await UserInput.ask('host: ');
-    this.print();
     this.#remoteFolder = await UserInput.ask('remoteFolder: ');
-    this.print();
     this.#localFolder = await UserInput.ask('localFolder: ');
-    this.print();
   }
 
   print() {
